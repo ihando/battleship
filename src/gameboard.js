@@ -33,20 +33,18 @@ class gameboard {
   }
 
   recieveAttack(coordinate) {
-    let hitstatus = true;
-    if (this.board[coordinate] === 0 || this.board[coordinate] === 1) {
+    if (this.board[coordinate] === 1) {
+      this.board[coordinate] = 2;
       for (let i = 0; i < this.ships.length; i++) {
-        for (let j = 0; j < this.ships[i].positions.length; j++) {
-          if (coordinate === this.ships[i].positions[j]) {
-            this.ships[i].hit();
-            this.board[coordinate] = 2;
-            hitstatus = false;
-          }
+        console.log(this.ships[i].positions);
+        if (this.ships[i].positions.includes(coordinate)) {
+          console.log("hi");
+          this.ships[i].hit();
+          break;
         }
       }
-      if (hitstatus) {
-        this.board[coordinate] = 3;
-      }
+    } else if (this.board[coordinate] === 0) {
+      this.board[coordinate] = 3;
     }
   }
 

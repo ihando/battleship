@@ -81,6 +81,7 @@ function rungame() {
   document.querySelector(".button").addEventListener("click", function () {
     playerturn = true;
     gameStart = true;
+    document.querySelector(".turnmessage").innerHTML = "Player's turn";
   });
   document
     .querySelector(".changeplacement")
@@ -90,6 +91,7 @@ function rungame() {
       }
     });
   function handleClick(event) {
+    document.querySelector(".turnmessage").innerHTML = "Computer's turn";
     if (!playerturn) return;
     if (event.target.classList.contains("grid-item")) {
       const index = Array.from(event.target.parentNode.children).indexOf(
@@ -124,6 +126,7 @@ function rungame() {
   function computerTurn() {
     let randomIndex;
     let validAttack = false;
+    document.querySelector(".turnmessage").innerHTML = "Player's turn";
 
     while (!validAttack) {
       randomIndex = Math.floor(Math.random() * 100);
@@ -150,9 +153,10 @@ function rungame() {
 
   function checkGameStatus() {
     if (player.gameboard.checkAllSunk()) {
-      console.log("hi");
+      document.querySelector(".winmessage").innerHTML("Computer won :(");
       endGame();
     } else if (computer.gameboard.checkAllSunk()) {
+      document.querySelector(".winmessage").innerHTML("You won!");
       console.log("hi");
       endGame();
     }
